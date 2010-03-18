@@ -71,7 +71,7 @@ list_iptables() {
 	# if running as root, skip sudo
 	[ "$(id -u)" != 0 ] || sudo=
 
-	$sudo $list_iptables | grep -c '^-A'
+	$sudo $list_iptables | grep -Fc /
 }
 
 while [ $# -gt 0 ]; do
@@ -131,7 +131,7 @@ done
 
 rc=$STATE_UNKNOWN
 
-list_iptables="$iptables -t $table -S $chain"
+list_iptables="$iptables -n -t $table -L $chain"
 
 if [ "$setup_sudo" = 1 ]; then
 	setup_sudoers
