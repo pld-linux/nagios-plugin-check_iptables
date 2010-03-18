@@ -2,7 +2,7 @@
 Summary:	Nagios plugin to check count of iptables rules
 Name:		nagios-plugin-%{plugin}
 Version:	0.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Networking
 Source0:	%{plugin}
