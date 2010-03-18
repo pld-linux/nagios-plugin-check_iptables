@@ -1,7 +1,7 @@
 #!/bin/sh
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
-PROGNAME=`basename $0`
+PROGNAME=${0##*/}
 PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 REVISION=`echo '$Revision$' | sed -e 's/[^0-9.]//g'`
 
@@ -26,7 +26,7 @@ print_help() {
 	echo ""
 	print_usage
 	echo ""
-	echo "This plugin test the SMTP service on the specified host by sending mail there"
+	echo "This plugin tests if iptables has needed amount of rules loaded"
 	echo ""
 
 	echo "-C CHAIN"
