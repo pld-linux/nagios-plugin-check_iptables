@@ -10,6 +10,7 @@ Source1:	%{plugin}.cfg
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	iptables
 Requires:	nagios-common
+Requires:	nagios-plugins-libs
 Requires:	sudo
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
