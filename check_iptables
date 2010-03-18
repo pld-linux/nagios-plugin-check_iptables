@@ -53,7 +53,7 @@ setup_sudoers() {
 	cat /etc/sudoers > $new
 	cat >> $new <<-EOF
 
-	# Lines matching CHECK_IPTABLES added by $0 -S on $(date)
+	# Lines matching CHECK_IPTABLES added by $0 $* on $(date)
 	User_Alias CHECK_IPTABLES=nagios
 	CHECK_IPTABLES ALL=(root) NOPASSWD: $iptables -n -t $table -L $chain
 	EOF
@@ -62,7 +62,7 @@ setup_sudoers() {
 		mv -f $new /etc/sudoers
 		exit 0
 	fi
-#	rm -f $new
+	rm -f $new
 	exit 1
 }
 
