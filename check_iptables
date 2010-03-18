@@ -14,6 +14,7 @@ table=filter
 verbose=0
 warning=1
 critical=1
+setup_sudo=0
 
 print_usage() {
     echo "Usage: $PROGNAME -C CHAIN -t TABLE"
@@ -55,7 +56,7 @@ setup_sudoers() {
 
 	# Lines matching CHECK_IPTABLES added by $0 $* on $(date)
 	User_Alias CHECK_IPTABLES=nagios
-	CHECK_IPTABLES ALL=(root) NOPASSWD: $iptables -n -t $table -L $chain
+	CHECK_IPTABLES ALL=(root) NOPASSWD: $list_iptables
 	EOF
 
 	if visudo -c -f $new; then
@@ -67,7 +68,10 @@ setup_sudoers() {
 }
 
 list_iptables() {
-	$sudo $iptables -n -t $table -L $chain | grep -Fc /
+	# if running as root, skip sudo
+	[ "$(id -u)" != 0 ] || sudo=
+
+	$sudo $list_iptables | grep -c '^-A'
 }
 
 while [ $# -gt 0 ]; do
@@ -97,7 +101,7 @@ while [ $# -gt 0 ]; do
 		;;
 
 	-S)
-		setup_sudoers
+		setup_sudo=1
 		;;
 
 	-C)
@@ -125,11 +129,13 @@ while [ $# -gt 0 ]; do
 	shift
 done
 
-
 rc=$STATE_UNKNOWN
 
-# if running as root, skip sudo
-[ "$(id -u)" != 0 ] || sudo=
+list_iptables="$iptables -t $table -S $chain"
+
+if [ "$setup_sudo" = 1 ]; then
+	setup_sudoers
+fi
 
 count=$(list_iptables)
 if [ "$count" -lt "$critical" ]; then
