@@ -4,6 +4,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 PROGNAME=${0##*/}
 PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
 REVISION=`echo '$Revision$' | sed -e 's/[^0-9.]//g'`
+ARGS="$*"
 
 . $PROGPATH/utils.sh
 
@@ -54,7 +55,7 @@ setup_sudoers() {
 	cat /etc/sudoers > $new
 	cat >> $new <<-EOF
 
-	# Lines matching CHECK_IPTABLES added by $0 $* on $(date)
+	# Lines matching CHECK_IPTABLES added by $0 $ARGS on $(date)
 	User_Alias CHECK_IPTABLES=nagios
 	CHECK_IPTABLES ALL=(root) NOPASSWD: $list_iptables
 	EOF
