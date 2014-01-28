@@ -5,7 +5,7 @@ Version:	0.1
 Release:	4
 License:	GPL v2
 Group:		Networking
-Source0:	%{plugin}
+Source0:	%{plugin}.sh
 Source1:	%{plugin}.cfg
 BuildRequires:	rpmbuild(macros) >= 1.552
 Requires:	iptables
