@@ -3,7 +3,7 @@ PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 
 PROGNAME=${0##*/}
 PROGPATH=`echo $0 | sed -e 's,[\\/][^\\/][^\\/]*$,,'`
-REVISION=`echo '$Revision$' | sed -e 's/[^0-9.]//g'`
+VERSION=0.2
 ARGS="$*"
 
 . $PROGPATH/utils.sh
@@ -24,7 +24,7 @@ print_usage() {
 }
 
 print_help() {
-	print_revision $PROGNAME $REVISION
+	print_revision $PROGNAME $VERSION
 	echo ""
 	print_usage
 	echo ""
@@ -88,12 +88,12 @@ while [ $# -gt 0 ]; do
 		;;
 
 	--version)
-		print_revision $PROGNAME $REVISION
+		print_revision $PROGNAME $VERSION
 		exit 0
 		;;
 
 	-V)
-		print_revision $PROGNAME $REVISION
+		print_revision $PROGNAME $VERSION
 		exit 0
 		;;
 
