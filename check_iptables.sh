@@ -8,7 +8,7 @@ ARGS="$*"
 
 . $PROGPATH/utils.sh
 
-iptables=iptables
+iptables=$(which iptables 2>/dev/null || echo /usr/sbin/iptables)
 sudo=sudo
 chain=INPUT
 table=filter
