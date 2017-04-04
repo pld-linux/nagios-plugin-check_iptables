@@ -8,8 +8,8 @@ ARGS="$*"
 
 . $PROGPATH/utils.sh
 
-iptables=/usr/sbin/iptables
-sudo=/usr/bin/sudo
+iptables=iptables
+sudo=sudo
 chain=INPUT
 table=filter
 verbose=0

@@ -1,8 +1,8 @@
 %define		plugin	check_iptables
 Summary:	Nagios plugin to check count of iptables rules
 Name:		nagios-plugin-%{plugin}
-Version:	0.1
-Release:	5
+Version:	0.2
+Release:	1
 License:	GPL v2
 Group:		Networking
 Source0:	%{plugin}.sh
